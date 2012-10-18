@@ -15,5 +15,6 @@ CarDetetor.exeÊÇ³µÁ¾¼ì²âµÄÖ÷³ÌĞò£¬ĞèÒªÔÚÆäËùÔÚÄ¿Â¼ÏÂ¶ÁÈ¡CarSVM.xml£¨¿ÉÓÃµÄxmlÎÄ¼
 #ÆäËû
 GUIÖĞµÄ½ø¶ÈÌõ´°¿ÚÊ¹ÓÃÁËÍøÉÏ¿ªÔ´´úÂë£¬ÏÂÔØµØÖ·Îª£ºhttp://www.xiaohui.com/dev/vccool/progress/2.htm£¬OpenCV¿ªÔ´´úÂëÏÂÔØµØÖ·Îª£ºhttp://www.opencv.org.cn/index.php/Download¡£
 
-ÓĞÈÎºÎÎÊÌâ¿ÉÁªÏµshengbinmeng@gmail.com.
+ÓĞÈÎºÎÎÊÌâ¿ÉÁªÏµ:
+shengbinmeng@gmail.com.
 
