@@ -339,7 +339,7 @@ void CCarDetectorDlg::OnBnClickedProcess()
 	if (m_ScaleOne) {
 		locations = LocateScaledCars(m_pInputImage);
 	} else {
-		locations = LocateCars(m_pInputImage);
+		locations = LocateScaledCars(m_pInputImage);
 	}
 	end = clock();
 	double sec = (double)(end - start) / CLK_TCK;
@@ -544,7 +544,7 @@ void CCarDetectorDlg::OnBnClickedProcessAll()
 		if (m_Scale) {
 			locations = LocateScaledCars(pInputImage);
 		} else {
-			locations = LocateCars(pInputImage);
+			locations = LocateScaledCars(pInputImage);
 		}
 		carNum += locations.size();
 		line.Format("%d:", i);

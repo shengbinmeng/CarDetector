@@ -48,7 +48,7 @@ cellSize Size(5,5);
 cellBin 9;
 winStride Size(40,20);
 Padding Size(0,0);
-total 3528 eigenvalues
+total 3456 eigenvalues
 training_img's size is 100*40
 */
 
@@ -65,9 +65,9 @@ void descript(char* szFile,vector <TrainImgDescript> &alldescriptors)
 	TrainImgDescript onedescriptor;
 	float trainlabel;
 	vector<float>  descriptorVector ;
-	IplImage *img=cvLoadImage(szFile,0);
-	HOGDescriptor *desc=new HOGDescriptor(Size(80, 40), Size(20, 10), Size(10, 5), Size(5,5), 9);
-	desc->compute(img,descriptorVector,Size(40,20),Size(0,0));
+	IplImage *img=cvLoadImage(szFile,0);	
+	HOGDescriptor *desc=new HOGDescriptor(Size(100, 70), Size(40, 20), Size(20, 10), Size(20,10), 9);
+	desc->compute(img,descriptorVector,Size(100,70),Size(0,0));
 	if(strstr(szFile,"pos")!=NULL)	
 		trainlabel=1.0;//pos	
 	else//neg
@@ -83,8 +83,8 @@ void descript(char* szFile,vector <TrainImgDescript> &alldescriptors)
 void trainSVM(vector <TrainImgDescript> &alldescriptors)
 {
 	//step1:设置训练样本集
-	float labels[1050];//数据的类别
-	static float trainingData[1050][3528];//数据向量信息
+	float labels[190];//数据的类别
+	static float trainingData[190][3456];//数据向量信息
 	//数据初始化
 	TrainImgDescript onedescriptor;
 	vector<float> onedescriptvector;
@@ -95,16 +95,16 @@ void trainSVM(vector <TrainImgDescript> &alldescriptors)
 	{
 		labels[i]=alldescriptors.at(i).first;		
 		fnum=(int)alldescriptors.at(i).second.size();
-		//cout<<fnum<<endl;//3528
+		//cout<<fnum<<endl;//3456
 		for(j=0;j<fnum;j++)
 		{
 			trainingData[i][j]=alldescriptors.at(i).second[j];
 		}
 	}	
 	//数据格式化(矩阵)
-	Mat labelsMat(1050, 1, CV_32FC1, labels); 
+	Mat labelsMat(190, 1, CV_32FC1, labels); 
 	//trainingDataMat
-	Mat trainingDataMat(1050, 3528, CV_32FC1, trainingData); 
+	Mat trainingDataMat(190, 3456, CV_32FC1, trainingData); 
 	
 	//step2:设置SVM参数
 	CvSVMParams params; //设置SVM参数
@@ -120,7 +120,7 @@ void trainSVM(vector <TrainImgDescript> &alldescriptors)
 	CarSVM.save("CarSVM.xml");
 
 	//step4:SVM分类(CvSVM::predict函数实现分类)	
-	/*Mat sample(1,3528,CV_32FC1,trainingData[21]);
+	/*Mat sample(1,3456,CV_32FC1,trainingData[21]);
 	float car=CarSVM.predict(sample);
 	cout<<i<<":"<<car<<endl;*/
 }

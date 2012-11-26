@@ -13,9 +13,9 @@ using namespace std;
 
 static int svmLoaded = 0;
 static SVM testSVM;
-static HOGDescriptor desc(cv::Size(80, 40), cv::Size(20, 10), cv::Size(10, 5), cv::Size(5,5), 9);
+static HOGDescriptor desc(cv::Size(100, 70), cv::Size(40, 20), cv::Size(20, 10), cv::Size(20,10), 9);
 static vector<float> descriptorVector;
-static float testsample[3528];
+static float testsample[3456];
 float predictCar(Mat img)
 {
 	if (!svmLoaded) {
@@ -24,13 +24,13 @@ float predictCar(Mat img)
 	}
 	
 	descriptorVector.clear();
-	desc.compute(img,descriptorVector,Size(40,20),Size(0,0));
+	desc.compute(img,descriptorVector,Size(100,70),Size(0,0));
 
-	for (int j=0;j<3528;j++)
+	for (int j=0;j<3456;j++)
 	{
 		testsample[j]=descriptorVector.at(j);
 	}
-	Mat sample(1,3528,CV_32FC1,testsample);
+	Mat sample(1,3456,CV_32FC1,testsample);
 
 	float car = testSVM.predict(sample,true);
 	/*returnDFVal?=true*/
