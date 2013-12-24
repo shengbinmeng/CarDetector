@@ -17,7 +17,7 @@ To run, the .exe files need OpenCV2.0 DLLs, which are already in ./executable. P
 CarDetetor.exe will read CarSVM.xml in its own directory. A usable xml file has been put in ./executable.
 If you want to train the SVM to generate CarSVM.xml again, run the SVMGenerator.exe, and pass it the path to the training set picture folder.
 
-Use CarDetetor.exe as the GUI directs you¡£A simple evaluation process is: select the test set picture folder, hit Detect All, then hit Evaluate when the progress bar finishes.
+Use CarDetetor.exe as the GUI directs you. A simple evaluation process is: select the test set picture folder, hit Detect All, then hit Evaluate when the progress bar finishes.
 The Evaluate command needs java.exe in your system path.
 
 #More
