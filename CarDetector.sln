@@ -1,9 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CarDetector", "CarDetector\CarDetector.vcproj", "{28FD444D-1B10-4A9A-85E4-263B386E149B}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CarDetector", "CarDetector\CarDetector.vcxproj", "{28FD444D-1B10-4A9A-85E4-263B386E149B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SVMGenerator", "SVMGenerator\SVMGenerator.vcproj", "{9F41DE0C-E5B6-404F-B785-C9AB2DF9850F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SVMGenerator", "SVMGenerator\SVMGenerator.vcxproj", "{9F41DE0C-E5B6-404F-B785-C9AB2DF9850F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
