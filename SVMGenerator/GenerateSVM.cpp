@@ -82,10 +82,9 @@ void descript(char* szFile,vector <TrainImgDescript> &alldescriptors)
 /*Train to generate a SVM classifier*/
 void trainSVM(vector <TrainImgDescript> &alldescriptors)
 {
-	//step1:设置训练样本集
-	float labels[190];//数据的类别
-	static float trainingData[190][3456];//数据向量信息
-	//数据初始化
+	//step1: set training set
+	float labels[190];
+	static float trainingData[190][3456];
 	TrainImgDescript onedescriptor;
 	vector<float> onedescriptvector;
 	int i,j,fnum;
@@ -101,28 +100,21 @@ void trainSVM(vector <TrainImgDescript> &alldescriptors)
 			trainingData[i][j]=alldescriptors.at(i).second[j];
 		}
 	}	
-	//数据格式化(矩阵)
 	Mat labelsMat(190, 1, CV_32FC1, labels); 
-	//trainingDataMat
 	Mat trainingDataMat(190, 3456, CV_32FC1, trainingData); 
 	
-	//step2:设置SVM参数
-	CvSVMParams params; //设置SVM参数
+	//step2: set SVM parameters
+	CvSVMParams params;
 	// the following is all default, can be eleminated
-	params.svm_type = CvSVM::C_SVC;//SVM类型
-	params.kernel_type= CvSVM::RBF;//核函数的类型
-	params.term_crit =cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS,100,FLT_EPSILON) ;//SVM训练过程的终止条件:  、最大迭代次数 、结果精确性
+	params.svm_type = CvSVM::C_SVC;
+	params.kernel_type= CvSVM::RBF;
+	params.term_crit =cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS,100,FLT_EPSILON) ;
 
-	//step3:训练SVM(CvSVM::train函数建立SVM模型)	
+	//step3: train SVM
 	//CarSVM.train(trainingDataMat, labelsMat, Mat(),Mat(), params); 
 	CarSVM.train_auto(trainingDataMat, labelsMat, Mat(), Mat(), params,4);
-	//产生xml文件
+	// save as xml
 	CarSVM.save("CarSVM.xml");
-
-	//step4:SVM分类(CvSVM::predict函数实现分类)	
-	/*Mat sample(1,3456,CV_32FC1,trainingData[21]);
-	float car=CarSVM.predict(sample);
-	cout<<i<<":"<<car<<endl;*/
 }
 
 
@@ -183,7 +175,7 @@ void GenerateCarSVM(char *TrainPath)
 {
 	clock_t start,end;
 	start = clock();
-	vector <TrainImgDescript> alldescriptors;//all descriptors for traindata	
+	vector <TrainImgDescript> alldescriptors; //all descriptors for traindata	
 	FindAllFiles(TrainPath,alldescriptors);
 	end = clock();	
  	printf("Descriptors Generate Time:%f seconds.\n",(double)(end-start)/CLK_TCK);
