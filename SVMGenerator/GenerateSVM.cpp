@@ -82,10 +82,9 @@ void descript(char* szFile,vector <TrainImgDescript> &alldescriptors)
 /*Train to generate a SVM classifier*/
 void trainSVM(vector <TrainImgDescript> &alldescriptors)
 {
-	//step1:设置训练样本集
-	float labels[1050];//数据的类别
-	static float trainingData[1050][3528];//数据向量信息
-	//数据初始化
+	//step1: prepare training set
+	float labels[1050];
+	static float trainingData[1050][3528];
 	TrainImgDescript onedescriptor;
 	vector<float> onedescriptvector;
 	int i,j,fnum;
@@ -101,28 +100,21 @@ void trainSVM(vector <TrainImgDescript> &alldescriptors)
 			trainingData[i][j]=alldescriptors.at(i).second[j];
 		}
 	}	
-	//数据格式化(矩阵)
 	Mat labelsMat(1050, 1, CV_32FC1, labels); 
-	//trainingDataMat
 	Mat trainingDataMat(1050, 3528, CV_32FC1, trainingData); 
 	
-	//step2:设置SVM参数
-	CvSVMParams params; //设置SVM参数
+	//step2: set SVM parameters
+	CvSVMParams params;
 	// the following is all default, can be eleminated
-	params.svm_type = CvSVM::C_SVC;//SVM类型
-	params.kernel_type= CvSVM::RBF;//核函数的类型
-	params.term_crit =cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS,100,FLT_EPSILON) ;//SVM训练过程的终止条件:  、最大迭代次数 、结果精确性
+	params.svm_type = CvSVM::C_SVC;
+	params.kernel_type= CvSVM::RBF;
+	params.term_crit =cvTermCriteria(CV_TERMCRIT_ITER+CV_TERMCRIT_EPS,100,FLT_EPSILON) ;
 
-	//step3:训练SVM(CvSVM::train函数建立SVM模型)	
+	//step3: train the SVM
 	//CarSVM.train(trainingDataMat, labelsMat, Mat(),Mat(), params); 
 	CarSVM.train_auto(trainingDataMat, labelsMat, Mat(), Mat(), params,4);
-	//产生xml文件
+	//save to xml for future use
 	CarSVM.save("CarSVM.xml");
-
-	//step4:SVM分类(CvSVM::predict函数实现分类)	
-	/*Mat sample(1,3528,CV_32FC1,trainingData[21]);
-	float car=CarSVM.predict(sample);
-	cout<<i<<":"<<car<<endl;*/
 }
 
 
