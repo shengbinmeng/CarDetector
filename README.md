@@ -1,4 +1,4 @@
-#Intro
+#Introduction
 
 ./CarDetector.sln contains two projects, CarDetetor and SVMGenerator, both depending on OpenCV2.0, of which the headers and libs has already been put in ./OpenCV2.0.
 
